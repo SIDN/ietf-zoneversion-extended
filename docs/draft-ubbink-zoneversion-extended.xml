@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
+<rfc version="3" ipr="trust200902" docName="draft-ubbink-zoneversion-extended-00" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" indexInclude="true">
+
+<front>
+<title abbrev="zonever-ext">DNS Zone Version (ZONEVERSION) Extended</title><seriesInfo value="draft-ubbink-zoneversion-extended-00" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
+<author initials="S.W.J." surname="Ubbink" fullname="Stefan Ubbink"><organization>SIDN</organization><address><postal><street></street>
+</postal><email>stefan.ubbink@sidn.nl</email>
+</address></author><date/>
+<area>Internet</area>
+<workgroup>DNSOP</workgroup>
+
+<abstract>
+<t>The DNS Zone Version (ZONEVERSION) extended is a way to get information about
+the version of a DNS in the backend.
+For example when a DNSSEC signer for a zone generates a new SOA serial, because
+it has created new RRSIG records, the original data has not changed, but this
+is not visible to anyone looking at the zone. This document will make it
+possible show the zone information which is the base of the presented data.</t>
+</abstract>
+
+</front>
+
+<middle>
+
+<section anchor="discussion-venues"><name>Discussion Venues</name>
+<t>This note is to be removed before publishing as an RFC.</t>
+<t>Source for this draft and an issue tracker can be found at
+<eref target="https://github.com/SIDN/ietf-zoneversion-extended.git">https://github.com/SIDN/ietf-zoneversion-extended.git</eref> .</t>
+</section>
+
+<section anchor="introduction"><name>Introduction</name>
+<t>The DNS Zone Version (ZONEVERSION <xref target="RFC9660"></xref>) extended is a way to get
+information about the version of a DNS in the backend.
+For example when a DNSSEC signer for a zone generates a new SOA serial, because
+it has created new RRSIG records, the original data has not changed, but this
+is not visible to anyone looking at the zone. This document will make it
+possible show the zone information which is the base of the presented data.</t>
+</section>
+
+<section anchor="terminology"><name>Terminology and Definitions</name>
+<t>The key words &quot;<bcp14>MUST</bcp14>&quot;, &quot;<bcp14>MUST NOT</bcp14>&quot;, &quot;<bcp14>REQUIRED</bcp14>&quot;,
+&quot;<bcp14>SHALL</bcp14>&quot;, &quot;<bcp14>SHALL NOT</bcp14>&quot;, &quot;<bcp14>SHOULD</bcp14>&quot;, &quot;<bcp14>SHOULD NOT</bcp14>&quot;,
+&quot;<bcp14>RECOMMENDED</bcp14>&quot;, &quot;<bcp14>NOT RECOMMENDED</bcp14>&quot;, &quot;<bcp14>MAY</bcp14>&quot;, and
+&quot;<bcp14>OPTIONAL</bcp14>&quot; in this document are to be interpreted as described in
+BCP 14 <xref target="RFC2119"></xref><xref target="RFC8174"></xref> when, and only when, they appear in all
+capitals, as shown here.</t>
+</section>
+
+<section anchor="relation-to-the-zoneversion-option"><name>Relation to the ZONEVERSION option</name>
+<t>This document extends the original DNS Zone version Option [!@RFC9660] to
+include an extra ZONEVERSION type.</t>
+</section>
+
+<section anchor="the-backend-serial-in-the-zone"><name>The backend serial in the zone</name>
+<t>To make the backend serial available in the ZONEVERSION, it must be available
+in the zone itself. Because creating an out of bound solution would be to much
+work.
+This document defines a label where the backend serial will be available to be used in the ZONEVERSION.</t>
+<t>The backend serial will be published in a _version label under the zone apex.</t>
+<t>For example:</t>
+
+<artwork><![CDATA[_version.example.nl IN TXT "2025101099"
+]]>
+</artwork>
+<t>There <bcp14>MUST</bcp14> only be one _version label. (??? TODO what would happen if there are multiple???)</t>
+</section>
+
+<section anchor="the-backend-serial-zoneversion-type"><name>The backend serial ZONEVERSION type</name>
+<t>This document defines a new ZONEVERSION option TYPE, which can be constructed from a label in the zone.</t>
+<t>The mnemonic for this type is &quot;BACKEND-SERIAL&quot;.</t>
+<t>The VERSION value for the BACKEND-SERIAL type <bcp14>MUST</bcp14> be a copy of the _version label in the zone.</t>
+</section>
+
+<section anchor="security"><name>Security and Privacy Considerations</name>
+<t>TODO</t>
+</section>
+
+<section anchor="iana"><name>IANA Considerations</name>
+<t>This document has no IANA actions</t>
+</section>
+
+<section anchor="acknowledgements"><name>Acknowledgements</name>
+<t>Many thanks to original authors of <xref target="RFC9660"></xref>(the ZONEVERSION document).</t>
+</section>
+
+</middle>
+
+<back>
+<references><name>Normative References</name>
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9660.xml"/>
+</references>
+
+</back>
+
+</rfc>

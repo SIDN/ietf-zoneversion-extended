@@ -1,0 +1,224 @@
+
+
+
+
+DNSOP                                                      S.W.J. Ubbink
+Internet-Draft                                                      SIDN
+Intended status: Standards Track                           18 April 2025
+Expires: 20 October 2025
+
+
+                DNS Zone Version (ZONEVERSION) Extended
+                  draft-ubbink-zoneversion-extended-00
+
+Abstract
+
+   The DNS Zone Version (ZONEVERSION) extended is a way to get
+   information about the version of a DNS in the backend.  For example
+   when a DNSSEC signer for a zone generates a new SOA serial, because
+   it has created new RRSIG records, the original data has not changed,
+   but this is not visible to anyone looking at the zone.  This document
+   will make it possible show the zone information which is the base of
+   the presented data.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 20 October 2025.
+
+Copyright Notice
+
+   Copyright (c) 2025 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+
+
+
+
+
+
+
+
+
+
+Ubbink                   Expires 20 October 2025                [Page 1]
+
+Internet-Draft                 zonever-ext                    April 2025
+
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Discussion Venues . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   3.  Terminology and Definitions . . . . . . . . . . . . . . . . .   2
+   4.  Relation to the ZONEVERSION option  . . . . . . . . . . . . .   3
+   5.  The backend serial in the zone  . . . . . . . . . . . . . . .   3
+   6.  The backend serial ZONEVERSION type . . . . . . . . . . . . .   3
+   7.  Security and Privacy Considerations . . . . . . . . . . . . .   3
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   3
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   3
+   10. Normative References  . . . . . . . . . . . . . . . . . . . .   3
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
+
+1.  Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/SIDN/ietf-zoneversion-extended.git
+   (https://github.com/SIDN/ietf-zoneversion-extended.git) .
+
+2.  Introduction
+
+   The DNS Zone Version (ZONEVERSION [RFC9660]) extended is a way to get
+   information about the version of a DNS in the backend.  For example
+   when a DNSSEC signer for a zone generates a new SOA serial, because
+   it has created new RRSIG records, the original data has not changed,
+   but this is not visible to anyone looking at the zone.  This document
+   will make it possible show the zone information which is the base of
+   the presented data.
+
+3.  Terminology and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119][RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+
+
+Ubbink                   Expires 20 October 2025                [Page 2]
+
+Internet-Draft                 zonever-ext                    April 2025
+
+
+4.  Relation to the ZONEVERSION option
+
+   This document extends the original DNS Zone version Option
+   [!@RFC9660] to include an extra ZONEVERSION type.
+
+5.  The backend serial in the zone
+
+   To make the backend serial available in the ZONEVERSION, it must be
+   available in the zone itself.  Because creating an out of bound
+   solution would be to much work.  This document defines a label where
+   the backend serial will be available to be used in the ZONEVERSION.
+
+   The backend serial will be published in a _version label under the
+   zone apex.
+
+   For example:
+
+   _version.example.nl IN TXT "2025101099"
+
+   There MUST only be one _version label. (??? TODO what would happen if
+   there are multiple???)
+
+6.  The backend serial ZONEVERSION type
+
+   This document defines a new ZONEVERSION option TYPE, which can be
+   constructed from a label in the zone.
+
+   The mnemonic for this type is "BACKEND-SERIAL".
+
+   The VERSION value for the BACKEND-SERIAL type MUST be a copy of the
+   _version label in the zone.
+
+7.  Security and Privacy Considerations
+
+   TODO
+
+8.  IANA Considerations
+
+   This document has no IANA actions
+
+9.  Acknowledgements
+
+   Many thanks to original authors of [RFC9660](the ZONEVERSION
+   document).
+
+10.  Normative References
+
+
+
+
+
+Ubbink                   Expires 20 October 2025                [Page 3]
+
+Internet-Draft                 zonever-ext                    April 2025
+
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC9660]  Salgado, H., Vergara, M., and D. Wessels, "The DNS Zone
+              Version (ZONEVERSION) Option", RFC 9660,
+              DOI 10.17487/RFC9660, October 2024,
+              <https://www.rfc-editor.org/info/rfc9660>.
+
+Author's Address
+
+   Stefan Ubbink
+   SIDN
+   Email: stefan.ubbink@sidn.nl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ubbink                   Expires 20 October 2025                [Page 4]
