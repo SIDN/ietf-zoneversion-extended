@@ -10,7 +10,7 @@ name = "Internet-Draft"
 value = "draft-ubbink-zoneversion-extended-00"
 stream = "IETF"
 
-date = 2025-01-10T11:00:00Z
+date = 2025-05-02T07:00:00Z
 
 [[author]]
 initials = "S.W.J."
@@ -77,7 +77,7 @@ For example:
 
     _version.example.nl IN TXT "2025101099"
 
-There **MUST** only be one \_version label. (??? TODO what would happen if there are multiple???)
+There **MUST** only be one \_version label.
 
 # The backend serial ZONEVERSION type
 
@@ -90,7 +90,8 @@ The VERSION value for the BACKEND-SERIAL type **MUST** be a copy of the \_versio
 
 # Security and Privacy Considerations {#security}
 
-TODO
+Do a risc assessment if publishing the backend serial is a security issue
+before publishing it.
 
 # IANA Considerations {#iana}
 

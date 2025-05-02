@@ -4,8 +4,8 @@
 
 DNSOP                                                      S.W.J. Ubbink
 Internet-Draft                                                      SIDN
-Intended status: Standards Track                           18 April 2025
-Expires: 20 October 2025
+Intended status: Standards Track                              2 May 2025
+Expires: 3 November 2025
 
 
                 DNS Zone Version (ZONEVERSION) Extended
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 October 2025.
+   This Internet-Draft will expire on 3 November 2025.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Ubbink                   Expires 20 October 2025                [Page 1]
+Ubbink                   Expires 3 November 2025                [Page 1]
 
-Internet-Draft                 zonever-ext                    April 2025
+Internet-Draft                 zonever-ext                      May 2025
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Ubbink                   Expires 20 October 2025                [Page 2]
+Ubbink                   Expires 3 November 2025                [Page 2]
 
-Internet-Draft                 zonever-ext                    April 2025
+Internet-Draft                 zonever-ext                      May 2025
 
 
 4.  Relation to the ZONEVERSION option
@@ -133,8 +133,7 @@ Internet-Draft                 zonever-ext                    April 2025
 
    _version.example.nl IN TXT "2025101099"
 
-   There MUST only be one _version label. (??? TODO what would happen if
-   there are multiple???)
+   There MUST only be one _version label.
 
 6.  The backend serial ZONEVERSION type
 
@@ -148,7 +147,8 @@ Internet-Draft                 zonever-ext                    April 2025
 
 7.  Security and Privacy Considerations
 
-   TODO
+   Do a risc assessment if publishing the backend serial is a security
+   issue before publishing it.
 
 8.  IANA Considerations
 
@@ -165,9 +165,9 @@ Internet-Draft                 zonever-ext                    April 2025
 
 
 
-Ubbink                   Expires 20 October 2025                [Page 3]
+Ubbink                   Expires 3 November 2025                [Page 3]
 
-Internet-Draft                 zonever-ext                    April 2025
+Internet-Draft                 zonever-ext                      May 2025
 
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -221,4 +221,4 @@ Author's Address
 
 
 
-Ubbink                   Expires 20 October 2025                [Page 4]
+Ubbink                   Expires 3 November 2025                [Page 4]

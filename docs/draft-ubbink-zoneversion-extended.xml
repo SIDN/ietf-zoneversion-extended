@@ -63,7 +63,7 @@ This document defines a label where the backend serial will be available to be u
 <artwork><![CDATA[_version.example.nl IN TXT "2025101099"
 ]]>
 </artwork>
-<t>There <bcp14>MUST</bcp14> only be one _version label. (??? TODO what would happen if there are multiple???)</t>
+<t>There <bcp14>MUST</bcp14> only be one _version label.</t>
 </section>
 
 <section anchor="the-backend-serial-zoneversion-type"><name>The backend serial ZONEVERSION type</name>
@@ -73,7 +73,8 @@ This document defines a label where the backend serial will be available to be u
 </section>
 
 <section anchor="security"><name>Security and Privacy Considerations</name>
-<t>TODO</t>
+<t>Do a risc assessment if publishing the backend serial is a security issue
+before publishing it.</t>
 </section>
 
 <section anchor="iana"><name>IANA Considerations</name>
