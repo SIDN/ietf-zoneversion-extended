@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
-<rfc version="3" ipr="trust200902" docName="draft-ubbink-zoneversion-extended-00" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" indexInclude="true">
+<rfc version="3" ipr="trust200902" docName="draft-ubbink-dnsop-backend-serial-zoneversion-option-00" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" indexInclude="true">
 
 <front>
-<title abbrev="zonever-ext">DNS Zone Version (ZONEVERSION) Extended</title><seriesInfo value="draft-ubbink-zoneversion-extended-00" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
+<title abbrev="dns-backend-zoneversion">DNS Backend Serial Zone Version Option</title><seriesInfo value="draft-ubbink-dnsop-backend-serial-zoneversion-option-00" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
 <author initials="S.W.J." surname="Ubbink" fullname="Stefan Ubbink"><organization>SIDN</organization><address><postal><street></street>
 </postal><email>stefan.ubbink@sidn.nl</email>
 </address></author><date/>
@@ -11,12 +11,12 @@
 <workgroup>DNSOP</workgroup>
 
 <abstract>
-<t>The DNS Zone Version (ZONEVERSION) extended is a way to get information about
-the version of a DNS in the backend.
+<t>The DNS Backend Serial Zone Version Opion is a way to get information about
+the version of a DNS zone in the backend.
 For example when a DNSSEC signer for a zone generates a new SOA serial, because
 it has created new RRSIG records, the original data has not changed, but this
-is not visible to anyone looking at the zone. This document will make it
-possible show the zone information which is the base of the presented data.</t>
+is not visible to anyone looking at the zone via DNS. This document will make it
+possible show the zone information which is the source of the presented data.</t>
 </abstract>
 
 </front>
@@ -30,12 +30,13 @@ possible show the zone information which is the base of the presented data.</t>
 </section>
 
 <section anchor="introduction"><name>Introduction</name>
-<t>The DNS Zone Version (ZONEVERSION <xref target="RFC9660"></xref>) extended is a way to get
-information about the version of a DNS in the backend.
+<t>The DNS Backend Serial Zone Version Option is a way to get
+information about the version of a DNS zone in the backend.
 For example when a DNSSEC signer for a zone generates a new SOA serial, because
 it has created new RRSIG records, the original data has not changed, but this
-is not visible to anyone looking at the zone. This document will make it
-possible show the zone information which is the base of the presented data.</t>
+is not visible to anyone looking at the zone.
+This document makes it possible to retreive the backend version that is
+the source of data in the DNS response.</t>
 </section>
 
 <section anchor="terminology"><name>Terminology and Definitions</name>
@@ -57,32 +58,81 @@ include an extra ZONEVERSION type.</t>
 in the zone itself. Because creating an out of bound solution would be to much
 work.
 This document defines a label where the backend serial will be available to be used in the ZONEVERSION.</t>
-<t>The backend serial will be published in a _version label under the zone apex.</t>
+<t>The backend serial will be published in a _backend-version label under the zone apex.</t>
 <t>For example:</t>
 
-<artwork><![CDATA[_version.example.nl IN TXT "2025101099"
+<artwork><![CDATA[_backend-version.example.nl IN TXT "2025101099"
 ]]>
 </artwork>
-<t>There <bcp14>MUST</bcp14> only be one _version label.</t>
+<t>The setting of the value of the _backend-version label is out of scope for
+this document. The RDATA is not limited to a 32-bit number, like the
+SOA-SERIAL. It can be any string.</t>
+<t>There <bcp14>MUST</bcp14> only be one _backend-version label.</t>
 </section>
 
-<section anchor="the-backend-serial-zoneversion-type"><name>The backend serial ZONEVERSION type</name>
-<t>This document defines a new ZONEVERSION option TYPE, which can be constructed from a label in the zone.</t>
+<section anchor="backend-serial"><name>The backend serial ZONEVERSION type</name>
+<t>This document defines a new ZONEVERSION option TYPE, which can be constructed
+from RDATA in the zone.</t>
 <t>The mnemonic for this type is &quot;BACKEND-SERIAL&quot;.</t>
-<t>The VERSION value for the BACKEND-SERIAL type <bcp14>MUST</bcp14> be a copy of the _version label in the zone.</t>
+<t>The VERSION value for the BACKEND-SERIAL type <bcp14>MUST</bcp14> come from the RDATA of
+the _backend-version label in the zone. Unless the software already knows the
+backend serial, then it <bcp14>SHOULD</bcp14> use that.
+If there are multiple _backend-version labels at the zone apex, these
+<bcp14>MUST</bcp14> be ignored.</t>
 </section>
 
 <section anchor="security"><name>Security and Privacy Considerations</name>
-<t>Do a risc assessment if publishing the backend serial is a security issue
-before publishing it.</t>
+<t>TODO</t>
 </section>
 
 <section anchor="iana"><name>IANA Considerations</name>
-<t>This document has no IANA actions</t>
+
+<section anchor="zoneversion-type-value"><name>ZONEVERSION TYPE value</name>
+<t>This document defines a new item for the ZONEVERSION TYPE option, entitled
+BACKEND-SERIAL (see <xref target="backend-serial"></xref>), and assigns a value of &lt;TDB&gt; from the
+ZONEVERSION TYPE Values space:</t>
+<table>
+<thead>
+<tr>
+<th>ZONEVERSION TYPE</th>
+<th>Mnemonic</th>
+<th>Reference</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>&lt;TBD&gt;</td>
+<td>BACKEND-SERIAL</td>
+<td>[this document]</td>
+</tr>
+</tbody>
+</table></section>
+
+<section anchor="backend-version-underscore-name"><name>_backend-version Underscore Name</name>
+<t>Per <xref target="RFC8552"></xref>, IANA is requested to add the following entries to the
+&quot;Underscored and Globally Scoped DNS Node Names&quot; registry:</t>
+<table>
+<thead>
+<tr>
+<th>RR Type</th>
+<th>_NODE NAME</th>
+<th>Reference</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TXT</td>
+<td>_backend-version</td>
+<td>[this document]</td>
+</tr>
+</tbody>
+</table></section>
 </section>
 
 <section anchor="acknowledgements"><name>Acknowledgements</name>
-<t>Many thanks to original authors of <xref target="RFC9660"></xref>(the ZONEVERSION document).</t>
+<t>Many thanks to original authors of <xref target="RFC9660"></xref>.</t>
 </section>
 
 </middle>
@@ -91,6 +141,7 @@ before publishing it.</t>
 <references><name>Normative References</name>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8552.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9660.xml"/>
 </references>
 

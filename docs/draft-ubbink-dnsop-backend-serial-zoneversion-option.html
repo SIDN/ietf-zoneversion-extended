@@ -4,24 +4,24 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>DNS Zone Version (ZONEVERSION) Extended</title>
+<title>DNS Backend Serial Zone Version Option</title>
 <meta content="Stefan Ubbink" name="author">
 <meta content="
-       The DNS Zone Version (ZONEVERSION) extended is a way to get information about
-the version of a DNS in the backend.
+       The DNS Backend Serial Zone Version Opion is a way to get information about
+the version of a DNS zone in the backend.
 For example when a DNSSEC signer for a zone generates a new SOA serial, because
 it has created new RRSIG records, the original data has not changed, but this
-is not visible to anyone looking at the zone. This document will make it
-possible show the zone information which is the base of the presented data. 
+is not visible to anyone looking at the zone via DNS. This document will make it
+possible show the zone information which is the source of the presented data. 
     " name="description">
 <meta content="xml2rfc 3.12.2" name="generator">
-<meta content="draft-ubbink-zoneversion-extended-00" name="ietf.draft">
+<meta content="draft-ubbink-dnsop-backend-serial-zoneversion-option-00" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.12.2
     Python 3.10.12
     weasyprint 54.1
 -->
-<link href="../docs/draft-ubbink-zoneversion-extended.xml" rel="alternate" type="application/rfc+xml">
+<link href="../docs/draft-ubbink-dnsop-backend-serial-zoneversion-option.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">/*
 
@@ -1174,12 +1174,12 @@ li > p:last-of-type {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">zonever-ext</td>
-<td class="right">April 2025</td>
+<td class="center">dns-backend-zoneversion</td>
+<td class="right">August 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ubbink</td>
-<td class="center">Expires 20 October 2025</td>
+<td class="center">Expires 14 February 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1189,15 +1189,15 @@ li > p:last-of-type {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">DNSOP</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ubbink-zoneversion-extended-00</dd>
+<dd class="internet-draft">draft-ubbink-dnsop-backend-serial-zoneversion-option-00</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-04-18" class="published">18 April 2025</time>
+<time datetime="2025-08-13" class="published">13 August 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-10-20">20 October 2025</time></dd>
+<dd class="expires"><time datetime="2026-02-14">14 February 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1207,15 +1207,15 @@ li > p:last-of-type {
 </dd>
 </dl>
 </div>
-<h1 id="title">DNS Zone Version (ZONEVERSION) Extended</h1>
+<h1 id="title">DNS Backend Serial Zone Version Option</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The DNS Zone Version (ZONEVERSION) extended is a way to get information about
-the version of a DNS in the backend.
+<p id="section-abstract-1">The DNS Backend Serial Zone Version Opion is a way to get information about
+the version of a DNS zone in the backend.
 For example when a DNSSEC signer for a zone generates a new SOA serial, because
 it has created new RRSIG records, the original data has not changed, but this
-is not visible to anyone looking at the zone. This document will make it
-possible show the zone information which is the base of the presented data.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+is not visible to anyone looking at the zone via DNS. This document will make it
+possible show the zone information which is the source of the presented data.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1236,7 +1236,7 @@ possible show the zone information which is the base of the presented data.<a hr
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1288,6 +1288,14 @@ possible show the zone information which is the base of the presented data.<a hr
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="xref">8.1</a>.  <a href="#name-zoneversion-type-value" class="xref">ZONEVERSION TYPE value</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="xref">8.2</a>.  <a href="#name-_backend-version-underscore" class="xref">_backend-version Underscore Name</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-acknowledgements" class="xref">Acknowledgements</a></p>
@@ -1317,12 +1325,13 @@ possible show the zone information which is the base of the presented data.<a hr
       <h2 id="name-introduction">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-2-1">The DNS Zone Version (ZONEVERSION <span>[<a href="#RFC9660" class="xref">RFC9660</a>]</span>) extended is a way to get
-information about the version of a DNS in the backend.
+<p id="section-2-1">The DNS Backend Serial Zone Version Option is a way to get
+information about the version of a DNS zone in the backend.
 For example when a DNSSEC signer for a zone generates a new SOA serial, because
 it has created new RRSIG records, the original data has not changed, but this
-is not visible to anyone looking at the zone. This document will make it
-possible show the zone information which is the base of the presented data.<a href="#section-2-1" class="pilcrow">¶</a></p>
+is not visible to anyone looking at the zone.
+This document makes it possible to retreive the backend version that is
+the source of data in the DNS response.<a href="#section-2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
@@ -1356,24 +1365,32 @@ include an extra ZONEVERSION type.<a href="#section-4-1" class="pilcrow">¶</a><
 in the zone itself. Because creating an out of bound solution would be to much
 work.
 This document defines a label where the backend serial will be available to be used in the ZONEVERSION.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The backend serial will be published in a _version label under the zone apex.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-2">The backend serial will be published in a _backend-version label under the zone apex.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">For example:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
-<pre>_version.example.nl IN TXT "2025101099"
+<pre>_backend-version.example.nl IN TXT "2025101099"
 
 </pre><a href="#section-5-4" class="pilcrow">¶</a>
 </div>
-<p id="section-5-5">There <span class="bcp14">MUST</span> only be one _version label. (??? TODO what would happen if there are multiple???)<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-5">The setting of the value of the _backend-version label is out of scope for
+this document. The RDATA is not limited to a 32-bit number, like the
+SOA-SERIAL. It can be any string.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">There <span class="bcp14">MUST</span> only be one _backend-version label.<a href="#section-5-6" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="the-backend-serial-zoneversion-type">
+<div id="backend-serial">
 <section id="section-6">
       <h2 id="name-the-backend-serial-zonevers">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-the-backend-serial-zonevers" class="section-name selfRef">The backend serial ZONEVERSION type</a>
       </h2>
-<p id="section-6-1">This document defines a new ZONEVERSION option TYPE, which can be constructed from a label in the zone.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This document defines a new ZONEVERSION option TYPE, which can be constructed
+from RDATA in the zone.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">The mnemonic for this type is "BACKEND-SERIAL".<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">The VERSION value for the BACKEND-SERIAL type <span class="bcp14">MUST</span> be a copy of the _version label in the zone.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-3">The VERSION value for the BACKEND-SERIAL type <span class="bcp14">MUST</span> come from the RDATA of
+the _backend-version label in the zone. Unless the software already knows the
+backend serial, then it <span class="bcp14">SHOULD</span> use that.
+If there are multiple _backend-version labels at the zone apex, these
+<span class="bcp14">MUST</span> be ignored.<a href="#section-6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security">
@@ -1389,7 +1406,59 @@ This document defines a label where the backend serial will be available to be u
       <h2 id="name-iana-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">This document has no IANA actions<a href="#section-8-1" class="pilcrow">¶</a></p>
+<div id="zoneversion-type-value">
+<section id="section-8.1">
+        <h3 id="name-zoneversion-type-value">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-zoneversion-type-value" class="section-name selfRef">ZONEVERSION TYPE value</a>
+        </h3>
+<p id="section-8.1-1">This document defines a new item for the ZONEVERSION TYPE option, entitled
+BACKEND-SERIAL (see <a href="#backend-serial" class="xref">Section 6</a>), and assigns a value of &lt;TDB&gt; from the
+ZONEVERSION TYPE Values space:<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<table class="center" id="table-1">
+          <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">ZONEVERSION TYPE</th>
+              <th class="text-left" rowspan="1" colspan="1">Mnemonic</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">&lt;TBD&gt;</td>
+              <td class="text-left" rowspan="1" colspan="1">BACKEND-SERIAL</td>
+              <td class="text-left" rowspan="1" colspan="1">[this document]</td>
+            </tr>
+          </tbody>
+        </table>
+</section>
+</div>
+<div id="backend-version-underscore-name">
+<section id="section-8.2">
+        <h3 id="name-_backend-version-underscore">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-_backend-version-underscore" class="section-name selfRef">_backend-version Underscore Name</a>
+        </h3>
+<p id="section-8.2-1">Per <span>[<a href="#RFC8552" class="xref">RFC8552</a>]</span>, IANA is requested to add the following entries to the
+"Underscored and Globally Scoped DNS Node Names" registry:<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<table class="center" id="table-2">
+          <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">RR Type</th>
+              <th class="text-left" rowspan="1" colspan="1">_NODE NAME</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">TXT</td>
+              <td class="text-left" rowspan="1" colspan="1">_backend-version</td>
+              <td class="text-left" rowspan="1" colspan="1">[this document]</td>
+            </tr>
+          </tbody>
+        </table>
+</section>
+</div>
 </section>
 </div>
 <div id="acknowledgements">
@@ -1397,7 +1466,7 @@ This document defines a label where the backend serial will be available to be u
       <h2 id="name-acknowledgements">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="section-9-1">Many thanks to original authors of <span>[<a href="#RFC9660" class="xref">RFC9660</a>]</span>(the ZONEVERSION document).<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">Many thanks to original authors of <span>[<a href="#RFC9660" class="xref">RFC9660</a>]</span>.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-10">
@@ -1412,6 +1481,10 @@ This document defines a label where the backend serial will be available to be u
 <dt id="RFC8174">[RFC8174]</dt>
       <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8552">[RFC8552]</dt>
+      <dd>
+<span class="refAuthor">Crocker, D.</span>, <span class="refTitle">"Scoped Interpretation of DNS Resource Records through "Underscored" Naming of Attribute Leaves"</span>, <span class="seriesInfo">BCP 222</span>, <span class="seriesInfo">RFC 8552</span>, <span class="seriesInfo">DOI 10.17487/RFC8552</span>, <time datetime="2019-03" class="refDate">March 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8552">https://www.rfc-editor.org/info/rfc8552</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9660">[RFC9660]</dt>
     <dd>
