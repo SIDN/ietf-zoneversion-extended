@@ -4,8 +4,8 @@
 
 DNSOP                                                      S.W.J. Ubbink
 Internet-Draft                                                      SIDN
-Intended status: Standards Track                          13 August 2025
-Expires: 14 February 2026
+Intended status: Standards Track                          18 August 2025
+Expires: 19 February 2026
 
 
                  DNS Backend Serial Zone Version Option
@@ -18,8 +18,8 @@ Abstract
    DNSSEC signer for a zone generates a new SOA serial, because it has
    created new RRSIG records, the original data has not changed, but
    this is not visible to anyone looking at the zone via DNS.  This
-   document will make it possible show the zone information which is the
-   source of the presented data.
+   document will make it possible to show the zone information which is
+   the source of the presented data.
 
 Status of This Memo
 
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 February 2026.
+   This Internet-Draft will expire on 19 February 2026.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Ubbink                  Expires 14 February 2026                [Page 1]
+Ubbink                  Expires 19 February 2026                [Page 1]
 
 Internet-Draft           dns-backend-zoneversion             August 2025
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Ubbink                  Expires 14 February 2026                [Page 2]
+Ubbink                  Expires 19 February 2026                [Page 2]
 
 Internet-Draft           dns-backend-zoneversion             August 2025
 
@@ -157,15 +157,15 @@ Internet-Draft           dns-backend-zoneversion             August 2025
    The VERSION value for the BACKEND-SERIAL type MUST come from the
    RDATA of the _backend-version label in the zone.  Unless the software
    already knows the backend serial, then it SHOULD use that.  If there
-   are multiple _backend-version labels at the zone apex, these MUST be
-   ignored.
+   are multiple _backend-version labels at the zone apex, these MUST all
+   be ignored.
 
 
 
 
 
 
-Ubbink                  Expires 14 February 2026                [Page 3]
+Ubbink                  Expires 19 February 2026                [Page 3]
 
 Internet-Draft           dns-backend-zoneversion             August 2025
 
@@ -179,7 +179,7 @@ Internet-Draft           dns-backend-zoneversion             August 2025
 8.1.  ZONEVERSION TYPE value
 
    This document defines a new item for the ZONEVERSION TYPE option,
-   entitled BACKEND-SERIAL (see Section 6), and assigns a value of <TDB>
+   entitled BACKEND-SERIAL (see Section 6), and assigns a value of <TBD>
    from the ZONEVERSION TYPE Values space:
 
           +==================+================+=================+
@@ -221,7 +221,7 @@ Internet-Draft           dns-backend-zoneversion             August 2025
 
 
 
-Ubbink                  Expires 14 February 2026                [Page 4]
+Ubbink                  Expires 19 February 2026                [Page 4]
 
 Internet-Draft           dns-backend-zoneversion             August 2025
 
@@ -277,4 +277,4 @@ Author's Address
 
 
 
-Ubbink                  Expires 14 February 2026                [Page 5]
+Ubbink                  Expires 19 February 2026                [Page 5]

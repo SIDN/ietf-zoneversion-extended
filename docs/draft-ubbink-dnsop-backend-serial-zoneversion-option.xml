@@ -16,7 +16,7 @@ the version of a DNS zone in the backend.
 For example when a DNSSEC signer for a zone generates a new SOA serial, because
 it has created new RRSIG records, the original data has not changed, but this
 is not visible to anyone looking at the zone via DNS. This document will make it
-possible show the zone information which is the source of the presented data.</t>
+possible to show the zone information which is the source of the presented data.</t>
 </abstract>
 
 </front>
@@ -78,7 +78,7 @@ from RDATA in the zone.</t>
 the _backend-version label in the zone. Unless the software already knows the
 backend serial, then it <bcp14>SHOULD</bcp14> use that.
 If there are multiple _backend-version labels at the zone apex, these
-<bcp14>MUST</bcp14> be ignored.</t>
+<bcp14>MUST</bcp14> all be ignored.</t>
 </section>
 
 <section anchor="security"><name>Security and Privacy Considerations</name>
@@ -89,7 +89,7 @@ If there are multiple _backend-version labels at the zone apex, these
 
 <section anchor="zoneversion-type-value"><name>ZONEVERSION TYPE value</name>
 <t>This document defines a new item for the ZONEVERSION TYPE option, entitled
-BACKEND-SERIAL (see <xref target="backend-serial"></xref>), and assigns a value of &lt;TDB&gt; from the
+BACKEND-SERIAL (see <xref target="backend-serial"></xref>), and assigns a value of &lt;TBD&gt; from the
 ZONEVERSION TYPE Values space:</t>
 <table>
 <thead>

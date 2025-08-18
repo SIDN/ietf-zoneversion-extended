@@ -29,7 +29,7 @@ the version of a DNS zone in the backend.
 For example when a DNSSEC signer for a zone generates a new SOA serial, because
 it has created new RRSIG records, the original data has not changed, but this
 is not visible to anyone looking at the zone via DNS. This document will make it
-possible show the zone information which is the source of the presented data.
+possible to show the zone information which is the source of the presented data.
 
 
 {mainmatter}
@@ -96,7 +96,7 @@ The VERSION value for the BACKEND-SERIAL type **MUST** come from the RDATA of
 the \_backend-version label in the zone. Unless the software already knows the
 backend serial, then it **SHOULD** use that.
 If there are multiple \_backend-version labels at the zone apex, these
-**MUST** be ignored.
+**MUST** all be ignored.
 
 
 # Security and Privacy Considerations {#security}
@@ -108,7 +108,7 @@ TODO
 ## ZONEVERSION TYPE value
 
 This document defines a new item for the ZONEVERSION TYPE option, entitled
-BACKEND-SERIAL (see (#backend-serial)), and assigns a value of <TDB> from the
+BACKEND-SERIAL (see (#backend-serial)), and assigns a value of <TBD> from the
 ZONEVERSION TYPE Values space:
 
 | ZONEVERSION TYPE | Mnemonic      | Reference       |
